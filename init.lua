@@ -167,9 +167,6 @@ minetest.register_craftitem("bonemeal:bonemeal", {
 		return itemstack
 	end,
 	
-	on_place = function(itemstack, user, pointed_thing)
-	      abstract_ferns.grow_giant_tree_fern(pointed_thing.under)
-	end,
 	
 })
 
