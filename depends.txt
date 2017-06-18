@@ -1,5 +1,7 @@
 default
 ferns
+farming_plus
+farming
 intllib?
 moretrees?
 technic_worldgen?

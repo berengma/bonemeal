@@ -18,6 +18,13 @@ local function pine_grow(pos)
 	end
 end
 
+local function banana_grow(pos)
+  farming.generate_tree({x=pos.x, y=pos.y+1, z=pos.z}, "default:tree", "farming_plus:banana_leaves",  farming.good_ground, {["farming_plus:banana"]=10},true)
+end
+
+local function cacoa_grow(pos)
+  farming.generate_tree({x=pos.x, y=pos.y+1, z=pos.z}, "default:tree", "farming_plus:cocoa_leaves", {"default:sand", "default:desert_sand"}, {["farming_plus:cocoa"]=20},true)
+end
 
 -- default saplings
 local saplings = {
@@ -30,6 +37,8 @@ local saplings = {
 	{"default:acacia_bush_sapling", default.grow_acacia_bush, "soil"},
 	{"ferns:sapling_giant_tree_fern", abstract_ferns.grow_giant_tree_fern, "soil"},
 	{"ferns:sapling_tree_fern", abstract_ferns.grow_tree_fern, "soil"},
+	{"farming_plus:cocoa_sapling", cacoa_grow, "soil"},
+	{"farming_plus:banana_sapling", banana_grow, "soil"},
 }
 
 ----- local functions
@@ -81,11 +90,12 @@ local function check_sapling(pos, nodename)
 	for n = 1, #saplings do
                             if saplings[n][1] == nodename then
 				particle_effect(pos)
-				if nodename == "ferns:sapling_giant_tree_fern" or nodename == "ferns:sapling_tree_fern" then
+				if nodename == "ferns:sapling_giant_tree_fern" or nodename == "ferns:sapling_tree_fern" or nodename == "farming_plus:cocoa_sapling" or nodename ==  "farming_plus:banana_sapling"then
 				      minetest.remove_node(pos)
 				      grow_tree({x=pos.x,y=pos.y-1,z=pos.z}, saplings[n][2])
 				else
 				      grow_tree(pos, saplings[n][2])
+				    
 				end
 			
 			    end
