@@ -28,8 +28,9 @@ local saplings = {
 	{"default:pine_sapling", pine_grow, "soil"},
 	{"default:bush_sapling", default.grow_bush, "soil"},
 	{"default:acacia_bush_sapling", default.grow_acacia_bush, "soil"},
+	{"ferns:sapling_giant_tree_fern", abstract_ferns.grow_giant_tree_fern, "soil"},
+	{"ferns:sapling_tree_fern", abstract_ferns.grow_tree_fern, "soil"},
 }
-
 
 ----- local functions
 
@@ -80,7 +81,13 @@ local function check_sapling(pos, nodename)
 	for n = 1, #saplings do
                             if saplings[n][1] == nodename then
 				particle_effect(pos)
-				grow_tree(pos, saplings[n][2])
+				if nodename == "ferns:sapling_giant_tree_fern" or nodename == "ferns:sapling_tree_fern" then
+				      minetest.remove_node(pos)
+				      grow_tree({x=pos.x,y=pos.y-1,z=pos.z}, saplings[n][2])
+				else
+				      grow_tree(pos, saplings[n][2])
+				end
+			
 			    end
 				
 	end
@@ -159,6 +166,11 @@ minetest.register_craftitem("bonemeal:bonemeal", {
 
 		return itemstack
 	end,
+	
+	on_place = function(itemstack, user, pointed_thing)
+	      abstract_ferns.grow_giant_tree_fern(pointed_thing.under)
+	end,
+	
 })
 
 

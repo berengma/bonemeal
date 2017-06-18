@@ -1,4 +1,5 @@
 default
+ferns
 intllib?
 moretrees?
 technic_worldgen?
