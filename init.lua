@@ -151,7 +151,7 @@ minetest.register_craftitem("bonemeal:bonemeal", {
 	on_use = function(itemstack, user, pointed_thing)
 
 		-- did we point at a node?
-		if pointed_thing.type ~= "node" then
+		if pointed_thing.type ~= "node" or user.is_fake_player then
 			return
 		end
 
