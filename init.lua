@@ -171,13 +171,28 @@ minetest.register_craftitem("bonemeal:bonemeal", {
 		      minetest.chat_send_player(name,"You cannot borrow this device !")
 		  else
 		     bonemeal:on_use(pointed_thing.under, 2)
-		  end
+		  end 
 		end
 
 		return itemstack
 	end,
 	
 	
+	on_place = function(itemstack, placer, pointed_thing)
+	
+	      local pos = minetest.get_pointed_thing_position(pointed_thing)
+	      local name = placer:get_player_name()
+	      
+	    if pos then
+	   
+	      local light = minetest.get_node_light(pos)
+	      local dlight = minetest.get_node_light({x=pos.x, y=pos.y -1, z=pos.z})
+	      local ulight = minetest.get_node_light({x=pos.x, y=pos.y +1, z=pos.z})
+	      
+	      minetest.chat_send_player(name, " >>>  lightlevel of pointed node = "..light.."  <<<     below it = "..dlight..",   above it = "..ulight)
+	    end
+	    
+	end,
 })
 
 
